@@ -1,10 +1,30 @@
-<p style="color: green"><%= notice %></p>
 
-<%= render @restaurant %>
+<div class="container">
+  <div class="header">
+    <h1><%= @restaurant.name %></h1>
+  </div>
 
-<div>
-  <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
-  <%= link_to "Back to restaurants", restaurants_path %>
+  <div class="content">
+     <p><strong>Address :</strong> <%= @restaurant.address %></p>
+     <p><strong>Catgeory : </strong><%= @restaurant.category %></p>
 
-  <%= button_to "Destroy this restaurant", @restaurant, method: :delete %>
+    <p><strong>Reviews :</strong></p>
+    <ul class="reviews-list">
+      <% @restaurant.reviews.each do |review| %>
+        <li class="list-group-item"><%= review.content %>
+        <p><%= review.rating %>/5</li></p>
+      <% end %>
+    </ul>
+    <br>
+  </div>
+
+  <div class="links">
+    <%= link_to "Add a review", new_restaurant_review_path(@restaurant) %> |
+    <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
+    <p class="back-link"><%= link_to "🔙", restaurants_path %></p>
+  </div>
+
+
+  <%= button_to "🗑", @restaurant, method: :delete %>
+
 </div>
